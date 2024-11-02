@@ -1,0 +1,118 @@
+# Ignore Visual Studio temporary files, build results, and
+# Rider specific folders, binaries, logs, etc.
+
+#############
+## General ##
+#############
+
+# OS generated files #
+######################
+.DS_Store
+Thumbs.db
+
+# Rider specific #
+##################
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Rider project files #
+#######################
+.idea/
+.idea_modules/
+*.iml
+/.idea_modules/
+.idea/workspace.xml
+.idea/usage.statistics.xml
+.idea/dictionaries
+.idea/shelf/
+.idea/sync/
+.idea/vcs.xml
+.idea/tasks.xml
+.idea/jsLibraryMappings.xml
+.idea/jarRepositories.xml
+.idea/riderCodeIndex/
+.idea/codeStyles/
+.idea/caches
+.idea/assetIndex
+.idea/gradle.xml
+.idea/libraries/
+.idea/markdown_navigator.xml
+.idea/riderCodeIndex/
+.idea/workspace.xml
+
+###############
+## C# Files  ##
+###############
+
+# C# Compiler artifacts #
+#########################
+bin/
+obj/
+out/
+*.dll
+*.pdb
+*.exe
+*.app
+*.ipa
+*.apk
+*.lib
+*.cso
+*.pdb
+
+# Visual Studio specific #
+##########################
+.vs/
+.vscode/
+.vscode-test/
+.vsconfig
+
+# User-specific files #
+#######################
+*.rsuser
+*.userprefs
+*.rsdf
+*.csproj.user
+*.csproj.vspscc
+*.vbproj.vspscc
+
+# Mono auto generated files #
+#############################
+mono_crash.*
+
+# Log and Database files #
+##########################
+*.log
+*.sql
+*.sqlite
+
+##################
+## Build System ##
+##################
+
+# NuGet packages #
+##################
+*.nupkg
+packages/
+# The `bin` folder contains compiled binaries and executables. Exclude it.
+bin/
+# The `obj` folder contains temporary object files and intermediates.
+obj/
+# Ignore build directories for different target frameworks
+build/
+buildArtifacts/
+
+# .NET Core #
+#############
+project.lock.json
+project.fragment.lock.json
+artifacts/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Local history for Rider #
+###########################
+.idea/
