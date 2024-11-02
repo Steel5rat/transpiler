@@ -5,6 +5,7 @@ using Transpiler.MySql;
 using Transpiler.MySql.SyntaxProviders;
 using Transpiler.Postgres;
 using Transpiler.Postgres.SyntaxProviders;
+using Transpiler.Redshift;
 using Transpiler.SqlServer;
 using Transpiler.SqlServer.SyntaxProviders;
 using Transpiler.Where;
@@ -22,7 +23,8 @@ public static class TranspilerFactory
         {
             { Dialect.Postgres, new PostgresLimitSyntaxProvider() },
             { Dialect.MySql, new MySqlLimitSyntaxProvider() },
-            { Dialect.SqlServer, new SqlServerLimitSyntaxProvider() }
+            { Dialect.SqlServer, new SqlServerLimitSyntaxProvider() },
+            { Dialect.Redshift, new RedshiftLimitSyntaxProvider() }
         }.ToImmutableDictionary());
 
         var whereGenerator = new WhereGenerator(new List<IPhraseGeneratorFactory>()
@@ -31,13 +33,15 @@ public static class TranspilerFactory
             {
                 { Dialect.Postgres, new PostgresEqualsSyntaxProvider() },
                 { Dialect.MySql, new MySqlEqualsSyntaxProvider() },
-                { Dialect.SqlServer, new SqlServerEqualsSyntaxProvider() }
+                { Dialect.SqlServer, new SqlServerEqualsSyntaxProvider() },
+                { Dialect.Redshift, new RedshiftEqualsSyntaxProvider() }
             }.ToImmutableDictionary()),
             new FieldPhraseGeneratorFactory(new Dictionary<Dialect, IFieldSyntaxProvider>
             {
                 { Dialect.Postgres, new PostgresFieldSyntaxProvider() },
                 { Dialect.MySql, new MySqlFieldSyntaxProvider() },
-                { Dialect.SqlServer, new SqlServerFieldSyntaxProvider() }
+                { Dialect.SqlServer, new SqlServerFieldSyntaxProvider() },
+                { Dialect.Redshift, new RedshiftFieldSyntaxProvider() }
             }.ToImmutableDictionary()),
             new NullPhraseGeneratorFactory(),
             new NumberPhraseGeneratorFactory(),
@@ -46,14 +50,17 @@ public static class TranspilerFactory
             new AndPhraseGeneratorFactory(),
             new NotPhraseGeneratorFactory(),
             new EmptyPhraseGeneratorFactory(),
-            new ComparisonPhraseGeneratorFactory()
+            new ComparisonPhraseGeneratorFactory(),
+            new LikePhraseGeneratorFactory(),
+            new BoolPhraseGeneratorFactory(),
         }.ToImmutableList());
 
         return new Transpiler(new List<IDialect>
         {
             new PostgresDialect(limitGenerator, whereGenerator),
             new MySqlDialect(limitGenerator, whereGenerator),
-            new SqlServerDialect(limitGenerator, whereGenerator)
+            new SqlServerDialect(limitGenerator, whereGenerator),
+            new RedshiftDialect(limitGenerator, whereGenerator)
         }.ToImmutableList());
     }
 }

@@ -4,5 +4,6 @@ public enum Dialect
 {
     Postgres,
     MySql,
-    SqlServer
+    SqlServer,
+    Redshift
 }

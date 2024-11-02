@@ -24,9 +24,14 @@ public static class PhraseGeneratorExtensions
         return phraseGenerator is StringPhraseGeneratorFactory.StringPhraseGenerator;
     }
     
+    public static bool IsBool(this IPhraseGenerator phraseGenerator)
+    {
+        return phraseGenerator is BoolPhraseGeneratorFactory.BoolPhraseGenerator;
+    }
+    
     public static bool IsPrimitive(this IPhraseGenerator phraseGenerator)
     {
-        return phraseGenerator.IsNull() || phraseGenerator.IsNumber() || phraseGenerator.IsString();
+        return phraseGenerator.IsNull() || phraseGenerator.IsNumber() || phraseGenerator.IsString() || phraseGenerator.IsBool();
     }
     
 }
