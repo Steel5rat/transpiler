@@ -32,17 +32,28 @@ public class WhereGenerator : IWhereGenerator
 
         IPhraseGenerator CreatePhraseGenerator(object? clause)
         {
+            IPhraseGenerator? result = null;
             foreach (var phraseGeneratorFactory in _phraseGeneratorFactories)
             {
                 var (isMatch, operandsToBeConverted) = phraseGeneratorFactory.IsMatch(clause);
                 if (isMatch)
                 {
+                    if (result is not null)
+                    {
+                        throw new ArgumentException($"Ambiguous phrase: {clause}");
+                    }
+
                     var convertedOperands = operandsToBeConverted.Select(CreatePhraseGenerator).ToImmutableList();
-                    return phraseGeneratorFactory.CreateGenerator(clause, convertedOperands, fields, dialect);
+                    result = phraseGeneratorFactory.CreateGenerator(clause, convertedOperands, fields, dialect);
                 }
             }
 
-            throw new ArgumentException($"Invalid clause {clause}, valid generator factory not found");
+            if (result is null)
+            {
+                throw new ArgumentException($"Invalid clause {clause}, valid generator factory not found");
+            }
+
+            return result;
         }
     }
 }

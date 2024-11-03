@@ -2,19 +2,11 @@
 using Transpiler.Common;
 using Transpiler.Models;
 
-namespace Transpiler.Where.PhraseGenerators;
+namespace Transpiler.Where.PhraseGenerators.Null;
 
 
 public class NullPhraseGeneratorFactory : IPhraseGeneratorFactory
 {
-    public class NullPhraseGenerator : IPhraseGenerator
-    {
-        public string GetSql()
-        {
-            return "NULL";
-        }
-    }
-
     public (bool isMatch, ImmutableList<object?> operandsToBeConverted) IsMatch(object? operand)
     {
         return (operand is null, ImmutableList<object?>.Empty);

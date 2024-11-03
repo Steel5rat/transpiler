@@ -3,7 +3,7 @@ using Transpiler.Common;
 using Transpiler.Models;
 using Transpiler.Where.SyntaxProviders;
 
-namespace Transpiler.Where.PhraseGenerators;
+namespace Transpiler.Where.PhraseGenerators.Field;
 
 public class FieldPhraseGeneratorFactory : IPhraseGeneratorFactory
 {
@@ -12,23 +12,6 @@ public class FieldPhraseGeneratorFactory : IPhraseGeneratorFactory
     public FieldPhraseGeneratorFactory(ImmutableDictionary<Dialect, IFieldSyntaxProvider> syntaxProviders)
     {
         _syntaxProviders = syntaxProviders;
-    }
-
-    public class FieldPhraseGenerator : IPhraseGenerator
-    {
-        private readonly string _fieldName;
-        private readonly IFieldSyntaxProvider _syntaxProvider;
-
-        public FieldPhraseGenerator(string fieldName, IFieldSyntaxProvider syntaxProvider)
-        {
-            _fieldName = fieldName;
-            _syntaxProvider = syntaxProvider;
-        }
-
-        public string GetSql()
-        {
-            return _syntaxProvider.Field(_fieldName);
-        }
     }
 
     public (bool isMatch, ImmutableList<object?> operandsToBeConverted) IsMatch(object? operand)

@@ -2,25 +2,10 @@
 using Transpiler.Common;
 using Transpiler.Models;
 
-namespace Transpiler.Where.PhraseGenerators;
+namespace Transpiler.Where.PhraseGenerators.NotPhrase;
 
 public class NotPhraseGeneratorFactory : IPhraseGeneratorFactory
 {
-    public class NotPhraseGenerator : IPhraseGenerator
-    {
-        public NotPhraseGenerator(IPhraseGenerator operand)
-        {
-            Operand = operand;
-        }
-
-        public IPhraseGenerator Operand { get; }
-
-        public string GetSql()
-        {
-            return $"NOT ({Operand.GetSql()})";
-        }
-    }
-
     public (bool isMatch, ImmutableList<object?> operandsToBeConverted) IsMatch(object? operand)
     {
         if (operand is List<object?> operandsAsList and ["not", _])
@@ -31,7 +16,7 @@ public class NotPhraseGeneratorFactory : IPhraseGeneratorFactory
         return (false, ImmutableList<object?>.Empty);
     }
 
-    public IPhraseGenerator CreateGenerator(object? _, ImmutableList<IPhraseGenerator> operands, Fields __,
+    public IPhraseGenerator CreateGenerator(object? _, ImmutableList<IPhraseGenerator> operands, Fields fields,
         Dialect dialect)
     {
         var operand = operands.Count switch

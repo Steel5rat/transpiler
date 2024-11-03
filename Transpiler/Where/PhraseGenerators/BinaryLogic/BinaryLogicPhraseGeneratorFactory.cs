@@ -1,15 +1,14 @@
 ﻿using System.Collections.Immutable;
 using Transpiler.Common;
 using Transpiler.Models;
-using Transpiler.Where.SyntaxProviders;
 
-namespace Transpiler.Where.PhraseGenerators;
+namespace Transpiler.Where.PhraseGenerators.BinaryLogic;
 
 public abstract class BinaryLogicPhraseGeneratorFactory : IPhraseGeneratorFactory
 {
     protected abstract string GetOperatorName();
 
-    protected abstract IPhraseGenerator CreateGenerator(ImmutableList<IPhraseGenerator> operands);
+    protected abstract IPhraseGenerator CreateGenerator(IPhraseGenerator operand1, IPhraseGenerator operand2);
 
     public (bool isMatch, ImmutableList<object?> operandsToBeConverted) IsMatch(object? operand)
     {
@@ -31,6 +30,12 @@ public abstract class BinaryLogicPhraseGeneratorFactory : IPhraseGeneratorFactor
         {
             return operands.First();
         }
-        return CreateGenerator(operands);
+
+        if (operands.Count > 3)
+        {
+            throw new InvalidOperationException($"Too many operands: {operands.Count}");
+        }
+
+        return CreateGenerator(operands[0], operands[1]);
     }
 }

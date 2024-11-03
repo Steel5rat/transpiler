@@ -10,6 +10,17 @@ using Transpiler.SqlServer;
 using Transpiler.SqlServer.SyntaxProviders;
 using Transpiler.Where;
 using Transpiler.Where.PhraseGenerators;
+using Transpiler.Where.PhraseGenerators.BinaryLogic;
+using Transpiler.Where.PhraseGenerators.Bool;
+using Transpiler.Where.PhraseGenerators.Comparison;
+using Transpiler.Where.PhraseGenerators.Empty;
+using Transpiler.Where.PhraseGenerators.EqualsPhrase;
+using Transpiler.Where.PhraseGenerators.Field;
+using Transpiler.Where.PhraseGenerators.Like;
+using Transpiler.Where.PhraseGenerators.NotPhrase;
+using Transpiler.Where.PhraseGenerators.Null;
+using Transpiler.Where.PhraseGenerators.Number;
+using Transpiler.Where.PhraseGenerators.StringPhrase;
 using Transpiler.Where.SyntaxProviders;
 
 namespace Transpiler.Tests;
@@ -36,6 +47,13 @@ public static class TranspilerFactory
                 { Dialect.SqlServer, new SqlServerEqualsSyntaxProvider() },
                 { Dialect.Redshift, new RedshiftEqualsSyntaxProvider() }
             }.ToImmutableDictionary()),
+            new NotEqualsPhraseGeneratorFactory(new Dictionary<Dialect, IEqualsSyntaxProvider>
+            {
+                { Dialect.Postgres, new PostgresEqualsSyntaxProvider() },
+                { Dialect.MySql, new MySqlEqualsSyntaxProvider() },
+                { Dialect.SqlServer, new SqlServerEqualsSyntaxProvider() },
+                { Dialect.Redshift, new RedshiftEqualsSyntaxProvider() }
+            }.ToImmutableDictionary()),
             new FieldPhraseGeneratorFactory(new Dictionary<Dialect, IFieldSyntaxProvider>
             {
                 { Dialect.Postgres, new PostgresFieldSyntaxProvider() },
@@ -49,8 +67,10 @@ public static class TranspilerFactory
             new OrPhraseGeneratorFactory(),
             new AndPhraseGeneratorFactory(),
             new NotPhraseGeneratorFactory(),
-            new EmptyPhraseGeneratorFactory(),
-            new ComparisonPhraseGeneratorFactory(),
+            new IsEmptyPhraseGeneratorFactory(),
+            new IsNotEmptyPhraseGeneratorFactory(),
+            new GreaterPhraseGeneratorFactory(),
+            new LowerPhraseGeneratorFactory(),
             new LikePhraseGeneratorFactory(),
             new BoolPhraseGeneratorFactory(),
         }.ToImmutableList());

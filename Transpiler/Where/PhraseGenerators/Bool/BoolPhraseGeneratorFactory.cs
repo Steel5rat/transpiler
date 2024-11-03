@@ -1,27 +1,11 @@
 ﻿using System.Collections.Immutable;
-using System.Globalization;
 using Transpiler.Common;
 using Transpiler.Models;
 
-namespace Transpiler.Where.PhraseGenerators;
+namespace Transpiler.Where.PhraseGenerators.Bool;
 
 public class BoolPhraseGeneratorFactory : IPhraseGeneratorFactory
 {
-    public class BoolPhraseGenerator : IPhraseGenerator
-    {
-        private readonly bool _value;
-
-        public BoolPhraseGenerator(bool value)
-        {
-            _value = value;
-        }
-
-        public string GetSql()
-        {
-            return _value ? "TRUE" : "FALSE";
-        }
-    }
-
     public (bool isMatch, ImmutableList<object?> operandsToBeConverted) IsMatch(object? operand)
     {
         return operand is bool
