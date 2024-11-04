@@ -10,7 +10,7 @@ public class SqlServerDialect : IDialect
     private readonly ILimitGenerator _limitGenerator;
     private readonly IWhereGenerator _whereGenerator;
 
-    public bool IsNameMatch(string name) => name == "sqlserver";
+    public bool IsNameMatch(string name) => name == Dialect.SqlServer.ToString().ToLower();
 
     public SqlServerDialect(ILimitGenerator limitGenerator,
         IWhereGenerator whereGenerator)

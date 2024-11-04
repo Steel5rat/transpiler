@@ -2,7 +2,7 @@
 using Transpiler.Common;
 using Transpiler.Models;
 
-namespace Transpiler.Tests;
+namespace Transpiler.Tests.EndToEndTests;
 
 [TestFixture]
 public class CustomEndToEndTests
@@ -10,7 +10,7 @@ public class CustomEndToEndTests
     [Test, TestCaseSource(nameof(EqualsTestCases))]
     public string EqualsTests(Dialect dialect, List<object?> whereClause)
     {
-        var transpiler = TranspilerFactory.Create();
+        var transpiler = new TranspilerFactory().CreateTranspiler();
 
         var result = transpiler.GenerateSql(dialect.ToString().ToLower(), new Fields { { 1, "id" }, { 2, "name" } },
             new Query()
@@ -23,7 +23,7 @@ public class CustomEndToEndTests
     [Test, TestCaseSource(nameof(LimitTestCases))]
     public string LimitTests(Dialect dialect)
     {
-        var transpiler = TranspilerFactory.Create();
+        var transpiler = new TranspilerFactory().CreateTranspiler();
 
         return transpiler.GenerateSql(dialect.ToString().ToLower(), new Fields { { 1, "id" }, { 2, "name" } },
             new Query()
@@ -36,7 +36,7 @@ public class CustomEndToEndTests
     [Test]
     public void LogicOperatorsHappyPath()
     {
-        var transpiler = TranspilerFactory.Create();
+        var transpiler = new TranspilerFactory().CreateTranspiler();
 
         var result = transpiler.GenerateSql(Dialect.Postgres.ToString().ToLower(),
             new Fields { { 1, "id" }, { 2, "name" } },
@@ -70,7 +70,7 @@ public class CustomEndToEndTests
     [Test]
     public void LogicOperatorOptimizationWithSingleOperand()
     {
-        var transpiler = TranspilerFactory.Create();
+        var transpiler = new TranspilerFactory().CreateTranspiler();
 
         var result = transpiler.GenerateSql(Dialect.Postgres.ToString().ToLower(),
             new Fields { { 1, "id" }, { 2, "name" } },
@@ -101,7 +101,7 @@ public class CustomEndToEndTests
     [Test]
     public void NotOperatorHappyPath()
     {
-        var transpiler = TranspilerFactory.Create();
+        var transpiler = new TranspilerFactory().CreateTranspiler();
 
         var result = transpiler.GenerateSql(Dialect.Postgres.ToString().ToLower(),
             new Fields { { 1, "id" }, { 2, "name" } },
@@ -133,7 +133,7 @@ public class CustomEndToEndTests
     [Test]
     public void NotOperatorOptimization()
     {
-        var transpiler = TranspilerFactory.Create();
+        var transpiler = new TranspilerFactory().CreateTranspiler();
 
         var result = transpiler.GenerateSql(Dialect.Postgres.ToString().ToLower(),
             new Fields { { 1, "id" }, { 2, "name" } },
@@ -168,7 +168,7 @@ public class CustomEndToEndTests
     [Test]
     public void EmptyHappyPath()
     {
-        var transpiler = TranspilerFactory.Create();
+        var transpiler = new TranspilerFactory().CreateTranspiler();
 
         var result = transpiler.GenerateSql(Dialect.Postgres.ToString().ToLower(),
             new Fields { { 1, "id" }, { 2, "name" } },
@@ -202,7 +202,7 @@ public class CustomEndToEndTests
     [Test]
     public void ComparisonHappyPath()
     {
-        var transpiler = TranspilerFactory.Create();
+        var transpiler = new TranspilerFactory().CreateTranspiler();
 
         var result = transpiler.GenerateSql(Dialect.Postgres.ToString().ToLower(),
             new Fields { { 1, "id" }, { 2, "name" } },

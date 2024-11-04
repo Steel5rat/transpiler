@@ -1,7 +1,7 @@
 ﻿using Transpiler.Common;
 using Transpiler.Models;
 
-namespace Transpiler.Tests;
+namespace Transpiler.Tests.EndToEndTests;
 
 [TestFixture]
 public class TestsFromTask
@@ -9,7 +9,7 @@ public class TestsFromTask
     [Test, TestCaseSource(nameof(ExamplesTestCases))]
     public string ExamplesTests(Dialect dialect, List<object?>? whereClause, int? limitClause)
     {
-        var transpiler = TranspilerFactory.Create();
+        var transpiler = new TranspilerFactory().CreateTranspiler();
         var query = new Query();
         if (whereClause is not null)
         {
@@ -29,7 +29,7 @@ public class TestsFromTask
     [Test, TestCaseSource(nameof(RequirementsTestCases))]
     public string RequirementsTests(Dialect dialect, List<object?>? whereClause, int? limitClause)
     {
-        var transpiler = TranspilerFactory.Create();
+        var transpiler = new TranspilerFactory().CreateTranspiler();
         var query = new Query();
         if (whereClause is not null)
         {

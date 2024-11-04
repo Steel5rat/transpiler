@@ -1,9 +1,12 @@
-﻿using Transpiler.Where.SyntaxProviders;
+﻿using Transpiler.Common;
+using Transpiler.Where.SyntaxProviders;
 
 namespace Transpiler.SqlServer.SyntaxProviders;
 
 public class SqlServerEqualsSyntaxProvider : IEqualsSyntaxProvider
 {
+    public Dialect Dialect => Dialect.SqlServer;
+    
     public string AreEqual(string operand1, string operand2)
     {
         return $"{operand1} = {operand2}";

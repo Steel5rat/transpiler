@@ -9,9 +9,10 @@ public class FieldPhraseGeneratorFactory : IPhraseGeneratorFactory
 {
     private readonly ImmutableDictionary<Dialect, IFieldSyntaxProvider> _syntaxProviders;
 
-    public FieldPhraseGeneratorFactory(ImmutableDictionary<Dialect, IFieldSyntaxProvider> syntaxProviders)
+    public FieldPhraseGeneratorFactory(IEnumerable<IFieldSyntaxProvider> syntaxProviders)
     {
-        _syntaxProviders = syntaxProviders;
+        _syntaxProviders = syntaxProviders.ToDictionary(p => p.Dialect, p => p)
+            .ToImmutableDictionary();
     }
 
     public (bool isMatch, ImmutableList<object?> operandsToBeConverted) IsMatch(object? operand)

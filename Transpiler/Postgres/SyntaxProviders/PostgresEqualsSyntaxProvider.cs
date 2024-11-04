@@ -1,9 +1,12 @@
-﻿using Transpiler.Where.SyntaxProviders;
+﻿using Transpiler.Common;
+using Transpiler.Where.SyntaxProviders;
 
 namespace Transpiler.Postgres.SyntaxProviders;
 
 public class PostgresEqualsSyntaxProvider : IEqualsSyntaxProvider
 {
+    public Dialect Dialect => Dialect.Postgres;
+    
     public string AreEqual(string operand1, string operand2)
     {
         return $"{operand1} = {operand2}";

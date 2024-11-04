@@ -10,9 +10,9 @@ public class WhereGenerator : IWhereGenerator
     private readonly ImmutableList<IPhraseGeneratorFactory> _phraseGeneratorFactories;
     private const string WhereKey = "where";
 
-    public WhereGenerator(ImmutableList<IPhraseGeneratorFactory> phraseGeneratorFactories)
+    public WhereGenerator(IEnumerable<IPhraseGeneratorFactory> phraseGeneratorFactories)
     {
-        _phraseGeneratorFactories = phraseGeneratorFactories;
+        _phraseGeneratorFactories = phraseGeneratorFactories.ToImmutableList();
     }
 
     public string GenerateClause(Fields fields, Query query, Dialect dialect)

@@ -9,7 +9,7 @@ public class RedshiftDialect : IDialect
 {
     private readonly ILimitGenerator _limitGenerator;
     private readonly IWhereGenerator _whereGenerator;
-    public bool IsNameMatch(string name) => name == "redshift";
+    public bool IsNameMatch(string name) => name == Dialect.Redshift.ToString().ToLower();
 
     public RedshiftDialect(ILimitGenerator limitGenerator,
         IWhereGenerator whereGenerator)

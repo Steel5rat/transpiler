@@ -1,7 +1,7 @@
 ﻿using Transpiler.Common;
 using Transpiler.Models;
 
-namespace Transpiler.Tests;
+namespace Transpiler.Tests.EndToEndTests;
 
 [TestFixture]
 public class ExtensionTests
@@ -9,7 +9,7 @@ public class ExtensionTests
     [Test]
     public void RedshiftHappyPath()
     {
-        var transpiler = TranspilerFactory.Create();
+        var transpiler = new TranspilerFactory().CreateTranspiler();
 
         var result = transpiler.GenerateSql(Dialect.Redshift.ToString().ToLower(),
             new Fields { { 1, "id" }, { 2, "name" } },
@@ -43,7 +43,7 @@ public class ExtensionTests
     [Test]
     public void LikeClauseHappyPath()
     {
-        var transpiler = TranspilerFactory.Create();
+        var transpiler = new TranspilerFactory().CreateTranspiler();
 
         var result = transpiler.GenerateSql(Dialect.Redshift.ToString().ToLower(),
             new Fields { { 1, "id" }, { 2, "name" } },
@@ -67,7 +67,7 @@ public class ExtensionTests
     [Test]
     public void BoolLiteralHappyPath()
     {
-        var transpiler = TranspilerFactory.Create();
+        var transpiler = new TranspilerFactory().CreateTranspiler();
 
         var result = transpiler.GenerateSql(Dialect.Postgres.ToString().ToLower(),
             new Fields { { 1, "id" }, { 2, "name" } },

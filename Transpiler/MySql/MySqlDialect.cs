@@ -9,7 +9,7 @@ public class MySqlDialect : IDialect
 {
     private readonly ILimitGenerator _limitGenerator;
     private readonly IWhereGenerator _whereGenerator;
-    public bool IsNameMatch(string name) => name == "mysql";
+    public bool IsNameMatch(string name) => name == Dialect.MySql.ToString().ToLower();
     
     public MySqlDialect(ILimitGenerator limitGenerator,
         IWhereGenerator whereGenerator)

@@ -10,9 +10,10 @@ public class LimitGenerator : ILimitGenerator
     
     private readonly ImmutableDictionary<Dialect, ILimitSyntaxProvider> _syntaxProviders;
 
-    public LimitGenerator(ImmutableDictionary<Dialect, ILimitSyntaxProvider> syntaxProviders)
+    public LimitGenerator(IEnumerable<ILimitSyntaxProvider> syntaxProviders)
     {
-        _syntaxProviders = syntaxProviders;
+        _syntaxProviders = syntaxProviders.ToDictionary(p => p.Dialect, p => p)
+            .ToImmutableDictionary();
     }
 
     public string GenerateClause(Query query, Dialect dialect)

@@ -4,13 +4,13 @@ using Transpiler.Models;
 
 namespace Transpiler;
 
-public class Transpiler
+public class Transpiler : ITranspiler
 {
     private readonly ImmutableList<IDialect> _dialects;
 
-    public Transpiler(ImmutableList<IDialect> dialects)
+    public Transpiler(IEnumerable<IDialect> dialects)
     {
-        _dialects = dialects;
+        _dialects = dialects.ToImmutableList();
     }
 
     public string GenerateSql(string dialectName, Fields fields, Query query)

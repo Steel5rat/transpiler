@@ -10,7 +10,7 @@ public class PostgresDialect : IDialect
     private readonly ILimitGenerator _limitGenerator;
     private readonly IWhereGenerator _whereGenerator;
 
-    public bool IsNameMatch(string name) => name == "postgres";
+    public bool IsNameMatch(string name) => name == Dialect.Postgres.ToString().ToLower();
 
     public PostgresDialect(ILimitGenerator limitGenerator,
         IWhereGenerator whereGenerator)

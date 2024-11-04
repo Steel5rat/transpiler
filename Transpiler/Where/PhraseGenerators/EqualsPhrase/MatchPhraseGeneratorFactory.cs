@@ -10,9 +10,10 @@ public abstract class MatchPhraseGeneratorFactory : IPhraseGeneratorFactory
 {
     private readonly ImmutableDictionary<Dialect, IEqualsSyntaxProvider> _syntaxProviders;
 
-    protected MatchPhraseGeneratorFactory(ImmutableDictionary<Dialect, IEqualsSyntaxProvider> syntaxProviders)
+    protected MatchPhraseGeneratorFactory(IEnumerable<IEqualsSyntaxProvider> syntaxProviders)
     {
-        _syntaxProviders = syntaxProviders;
+        _syntaxProviders = syntaxProviders.ToDictionary(p => p.Dialect, p => p)
+            .ToImmutableDictionary();
     }
 
     public (bool isMatch, ImmutableList<object?> operandsToBeConverted) IsMatch(object? operand)

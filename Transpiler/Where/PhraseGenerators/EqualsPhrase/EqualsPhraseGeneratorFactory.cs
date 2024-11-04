@@ -6,7 +6,7 @@ namespace Transpiler.Where.PhraseGenerators.EqualsPhrase;
 
 public class EqualsPhraseGeneratorFactory : MatchPhraseGeneratorFactory
 {
-    public EqualsPhraseGeneratorFactory(ImmutableDictionary<Dialect, IEqualsSyntaxProvider> syntaxProviders) : base(
+    public EqualsPhraseGeneratorFactory(IEnumerable<IEqualsSyntaxProvider> syntaxProviders) : base(
         syntaxProviders)
     {
     }
