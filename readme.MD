@@ -11,17 +11,17 @@ To run this project, ensure you have the following:
 
 ## Getting Started
 
-The main entry point of the implementation is located in `Transpiler.Transpiler.GenerateSql`. Core functionalities, including SQL clause generation, are placed in `WhereGenerator.GenerateClause` and several PhraseGenerator classes in `Transpiler.Where.PhraseGenerators` namespace.
+The main entry point of the implementation is located in `Transpiler.Transpiler.GenerateSql`. Core functionalities, including SQL clause generation, are placed in `Transpiler.Engine.Where.WhereGenerator.GenerateClause` and several PhraseGenerator classes in `Transpiler.Engine.Where.PhraseGenerators` namespace.
 
 ### Tests
 All End-to-End tests are places in `Transpiler.Tests.EndToEndTests` namespace.
 
-* Tests from the task description: Located in Transpiler.Tests.EndToEndTests.TestsFromTask
-* Additional End-to-End Tests: Located in CustomEndToEndTests
+* Tests from the task description: Located in `TestsFromTask`
+* Additional End-to-End Tests: Located in `CustomEndToEndTests`
 
 ### Macros
-Nested macros support implemented in `Transpiler.Where.PhraseGenerators.Macro` namespace. Tests are in `Transpiler.Tests.EndToEndTests.MacrosTests`.
+Nested macros support implemented in `Transpiler.Engine.Where.PhraseGenerators.Macro` namespace. Tests are in `Transpiler.Tests.EndToEndTests.MacrosTests`.
 
 ## Extensibility Demonstration
 
-To showcase the extensibility of the transpiler, a new SQL dialect for Redshift (`Transpiler.Redshift` namespace), support for boolean literals (`Transpiler.Where.PhraseGenerators.Bool` namespace), and a "LIKE" clause (`Transpiler.Where.PhraseGenerators.Like` namespace) were added. Tests for extended part are placed in dedicated tests file `Transpiler.Tests.EndToEndTests.ExtensionTests`
+To showcase the extensibility of the transpiler, a new SQL dialect for Redshift (`Transpiler.Dialects.Redshift` namespace), support for boolean literals (`Transpiler.Engine.Where.PhraseGenerators.Bool` namespace), and a "LIKE" clause (`Transpiler.Engine.Where.PhraseGenerators.Like` namespace) were added. Tests for extended part are placed in dedicated tests file `Transpiler.Tests.EndToEndTests.ExtensionTests`

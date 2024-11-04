@@ -1,5 +1,5 @@
-﻿using Transpiler.Common;
-using Transpiler.Models;
+﻿using Transpiler.Engine.Common;
+using Transpiler.Engine.Models;
 
 namespace Transpiler.Tests.EndToEndTests;
 
